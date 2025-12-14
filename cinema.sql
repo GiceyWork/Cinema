@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: MariaDB-11.8:3306
--- Время создания: Дек 13 2025 г., 05:41
+-- Время создания: Дек 14 2025 г., 16:22
 -- Версия сервера: 11.8.3-MariaDB
 -- Версия PHP: 8.4.13
 
@@ -149,7 +149,6 @@ INSERT INTO `genre_film` (`film_id`, `genre_id`) VALUES
 
 CREATE TABLE `room` (
   `id` int(11) NOT NULL,
-  `capacity` int(11) NOT NULL,
   `title` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -157,10 +156,10 @@ CREATE TABLE `room` (
 -- Дамп данных таблицы `room`
 --
 
-INSERT INTO `room` (`id`, `capacity`, `title`) VALUES
-(1, 50, 'Зал А'),
-(2, 75, 'Зал Б'),
-(3, 100, 'Зал В');
+INSERT INTO `room` (`id`, `title`) VALUES
+(1, 'Зал А'),
+(2, 'Зал Б'),
+(3, 'Зал В');
 
 -- --------------------------------------------------------
 
@@ -171,20 +170,21 @@ INSERT INTO `room` (`id`, `capacity`, `title`) VALUES
 CREATE TABLE `seans` (
   `film_id` int(11) NOT NULL,
   `id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL
+  `room_id` int(11) NOT NULL,
+  `seans_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `seans`
 --
 
-INSERT INTO `seans` (`film_id`, `id`, `room_id`) VALUES
-(1, 1, 1),
-(1, 2, 2),
-(2, 3, 1),
-(3, 4, 3),
-(4, 5, 2),
-(5, 6, 3);
+INSERT INTO `seans` (`film_id`, `id`, `room_id`, `seans_date`) VALUES
+(1, 1, 1, '2025-12-15 15:45:00'),
+(1, 2, 2, '2025-12-17 15:00:00'),
+(2, 3, 1, '2025-12-15 20:00:00'),
+(3, 4, 3, '2025-12-17 17:45:00'),
+(4, 5, 2, '2025-12-16 08:50:00'),
+(5, 6, 3, '2025-12-15 14:50:00');
 
 -- --------------------------------------------------------
 
@@ -193,25 +193,18 @@ INSERT INTO `seans` (`film_id`, `id`, `room_id`) VALUES
 --
 
 CREATE TABLE `seats` (
-  `id` int(11) NOT NULL,
-  `seans_id` int(11) NOT NULL
+  `seans_id` int(11) NOT NULL,
+  `seat_number` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `seats`
 --
 
-INSERT INTO `seats` (`id`, `seans_id`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 2),
-(5, 2),
-(6, 3),
-(7, 3),
-(8, 4),
-(9, 4),
-(10, 5);
+INSERT INTO `seats` (`seans_id`, `seat_number`) VALUES
+(1, 12),
+(1, 11),
+(2, 4);
 
 --
 -- Индексы сохранённых таблиц
@@ -272,8 +265,6 @@ ALTER TABLE `seans`
 -- Индексы таблицы `seats`
 --
 ALTER TABLE `seats`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`),
   ADD KEY `seats_fk1` (`seans_id`);
 
 --
@@ -309,12 +300,6 @@ ALTER TABLE `room`
 --
 ALTER TABLE `seans`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT для таблицы `seats`
---
-ALTER TABLE `seats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
