@@ -12,7 +12,6 @@ require("functions/all_genres.php");
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="scripts/javascript.js"></script>
     <script src="scripts/bootstrap.js"></script>
 </head>
 <body>
@@ -39,4 +38,6 @@ require("functions/all_genres.php");
 
     </footer>
 </body>
+    <script src="scripts/javascript.js"></script>
+
 </html>

@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+
+  
+
 let main_block=$('.block-films')
 
 $.ajax({
@@ -9,9 +12,24 @@ $.ajax({
   success: function(data) {
     main_block.empty
     data.forEach(item => {
-        main_block.append('<div class="film"><div class="film-photo"><img src="'+item.photo_path+'" alt=""></div><div class="d-flex w-100 gap-4 align-items-start"><p class="film-text">'+item.title+'</p><p class="film-text">'+item.price+'</p></div><div class="d-flex w-100 gap-4 align-items-start"><p class="film-text">'+item.duration_minute+' минут</p><p class="film-text d-flex gap-1 align-items-center"><i class="fi d-flex align-items-center fi-rr-star"></i>'+item.rating+'</p></div><div class="d-flex w-100 gap-4 align-items-start"><p class="film-text">'+item.release_date+'</p><button type="button" class="film-buy">Забронировать</button></div></div>')
+        main_block.append('<div class="film"><div class="film-photo"><img src="'+item.photo_path+'" alt=""></div><div class="d-flex  align-items-start"><p class="film-text">'+item.title+'</p><p class="film-text">'+item.price+'</p></div><div class="d-flex  align-items-start"><p class="film-text">'+item.duration_minute+' минут</p><p class="film-text d-flex gap-1 align-items-center"><i class="fi d-flex align-items-center fi-rr-star"></i>'+item.rating+'</p></div><div class="d-flex  align-items-start"><p class="film-text">'+item.release_date+'</p><button onclick=SelectSeans('+item.id+') type="button" class="film-buy">Забронировать</button></div></div>')
     });
   }
 });
 
 });
+
+function SelectSeans(film_id){
+console.log(film_id)
+$.ajax({
+    url: 'functions/seans_find.php',
+    method: 'POST',
+    data: { film_id: film_id },
+    dataType: 'json',
+    success: function(data) {
+      console.log(data)
+      
+    }
+  });
+
+}
