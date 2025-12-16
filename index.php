@@ -20,7 +20,18 @@ require("functions/all_genres.php");
             <button class="search-button" type="button"><i class="fi fi-rr-search"></i></button>
         </header>
         
-        <main>
+ <div class="modal-seans-fade">
+    <div class="modal-seans">
+        <span>Выберите подходящий сеанс</span>
+        <div class="block-seanses">
+            
+        </div>
+    </div>
+        
+ </div>
+
+        <main class="main">
+           	
             <aside class="block-filter">
                 <?php
                 foreach($genres as $genre){

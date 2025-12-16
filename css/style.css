@@ -80,3 +80,31 @@ main{
     width: 150px;
     height: 20px;
 }
+
+.modal-seans-fade {
+	display: none;
+}
+.modal-seans-fade:before {
+	content: '';
+	position: absolute;
+    background: #000;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.7;
+	z-index: 9999;
+}
+.modal-seans{
+	position: fixed;
+	top: 20%;
+	left: 50%;
+	padding: 20px;
+	width: 360px;
+	margin-left: -200px;	
+	background: #fff;
+	border: 1px solid orange;
+	border-radius: 4px; 
+	z-index: 99999;
+	opacity: 1;	
+}

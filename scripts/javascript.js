@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
 
-  
-
 let main_block=$('.block-films')
 
 $.ajax({
@@ -17,9 +15,29 @@ $.ajax({
   }
 });
 
+
+
+  
+
+
+
 });
 
+	$(document).keydown(function(e) {
+		if (e.keyCode === 27) {
+			e.stopPropagation();
+			$('.modal-seans-fade').fadeOut();
+		}
+	});
+	
+	$('.modal-seans-fade').click(function(e) {
+		if ($(e.target).closest('.modal-seans').length == 0) {
+			$(this).fadeOut();					
+		}
+	});	
+
 function SelectSeans(film_id){
+  $('.modal-seans-fade').fadeIn();
 console.log(film_id)
 $.ajax({
     url: 'functions/seans_find.php',
@@ -27,9 +45,11 @@ $.ajax({
     data: { film_id: film_id },
     dataType: 'json',
     success: function(data) {
-      console.log(data)
-      
+      $('.block-seanses').empty()
+      data.forEach(item => {
+        $('.block-seanses').append(`
+          <div>`+item.id+`</div>
+          `)
+      })
     }
-  });
-
-}
+})};
